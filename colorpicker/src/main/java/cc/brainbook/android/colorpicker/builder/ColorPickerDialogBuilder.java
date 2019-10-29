@@ -150,7 +150,6 @@ public class ColorPickerDialogBuilder {
 		builder.setNeutralButton(textId, onClickListener);
 		return this;
 	}
-	///[UPGRADE#setNeutralButton()]
 	public ColorPickerDialogBuilder setNeutralButton(CharSequence text, DialogInterface.OnClickListener onClickListener) {
 		builder.setNeutralButton(text, onClickListener);
 		return this;
