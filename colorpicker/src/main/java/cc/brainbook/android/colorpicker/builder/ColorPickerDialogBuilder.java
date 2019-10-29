@@ -145,6 +145,17 @@ public class ColorPickerDialogBuilder {
 		return this;
 	}
 
+	///[UPGRADE#setNeutralButton()]
+	public ColorPickerDialogBuilder setNeutralButton(int textId, DialogInterface.OnClickListener onClickListener) {
+		builder.setNeutralButton(textId, onClickListener);
+		return this;
+	}
+	///[UPGRADE#setNeutralButton()]
+	public ColorPickerDialogBuilder setNeutralButton(CharSequence text, DialogInterface.OnClickListener onClickListener) {
+		builder.setNeutralButton(text, onClickListener);
+		return this;
+	}
+
 	public ColorPickerDialogBuilder noSliders() {
 		isLightnessSliderEnabled = false;
 		isAlphaSliderEnabled = false;
