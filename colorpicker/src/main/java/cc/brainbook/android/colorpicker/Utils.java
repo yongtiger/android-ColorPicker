@@ -2,6 +2,8 @@ package cc.brainbook.android.colorpicker;
 
 import android.graphics.Color;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by Charles Andersons on 4/17/15.
  */
@@ -31,6 +33,7 @@ public class Utils {
 		return hsv[2];
 	}
 
+	@NonNull
     public static String getHexString(int color, boolean showAlpha) {
         int base = showAlpha ? 0xFFFFFFFF : 0xFFFFFF;
         String format = showAlpha ? "#%08X" : "#%06X";

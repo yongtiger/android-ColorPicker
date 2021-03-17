@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import android.text.InputFilter;
 import android.view.Gravity;
@@ -64,11 +66,13 @@ public class ColorPickerDialogBuilder {
 		builder.setView(pickerContainer);
 	}
 
-	public static ColorPickerDialogBuilder with(Context context) {
+	@NonNull
+	public static ColorPickerDialogBuilder with(@NonNull Context context) {
 		return new ColorPickerDialogBuilder(context);
 	}
 
-	public static ColorPickerDialogBuilder with(Context context, int theme) {
+	@NonNull
+	public static ColorPickerDialogBuilder with(@NonNull Context context, int theme) {
 		return new ColorPickerDialogBuilder(context, theme);
 	}
 
@@ -87,7 +91,8 @@ public class ColorPickerDialogBuilder {
 		return this;
 	}
 
-	public ColorPickerDialogBuilder initialColors(int[] initialColor) {
+	@NonNull
+	public ColorPickerDialogBuilder initialColors(@NonNull int[] initialColor) {
 		for (int i = 0; i < initialColor.length && i < this.initialColor.length; i++) {
 			this.initialColor[i] = initialColor[i];
 		}
@@ -278,8 +283,8 @@ public class ColorPickerDialogBuilder {
 		return builder.create();
 	}
 
-	private Integer getStartOffset(Integer[] colors) {
-		Integer start = 0;
+	private int getStartOffset(@NonNull Integer[] colors) {
+		int start = 0;
 		for (int i = 0; i < colors.length; i++) {
 			if (colors[i] == null) {
 				return start;
@@ -290,15 +295,15 @@ public class ColorPickerDialogBuilder {
 	}
 
 	private int getStartColor(Integer[] colors) {
-		Integer startColor = getStartOffset(colors);
-		return startColor == null ? Color.WHITE : colors[startColor];
+		int startColor = getStartOffset(colors);
+		return colors[startColor];
 	}
 
-	private static int getDimensionAsPx(Context context, int rid) {
+	private static int getDimensionAsPx(@NonNull Context context, int rid) {
 		return (int) (context.getResources().getDimension(rid) + .5f);
 	}
 
-	private void positiveButtonOnClick(DialogInterface dialog, ColorPickerClickListener onClickListener) {
+	private void positiveButtonOnClick(@NonNull DialogInterface dialog, @NonNull ColorPickerClickListener onClickListener) {
 		int selectedColor = colorPickerView.getSelectedColor();
 		Integer[] allColors = colorPickerView.getAllColors();
 		onClickListener.onClick(dialog, selectedColor, allColors);

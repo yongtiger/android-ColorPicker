@@ -7,8 +7,8 @@ import cc.brainbook.android.colorpicker.ColorCircle;
 import cc.brainbook.android.colorpicker.builder.PaintBuilder;
 
 public class SimpleColorWheelRenderer extends AbsColorWheelRenderer {
-	private Paint selectorFill = PaintBuilder.newPaint().build();
-	private float[] hsv = new float[3];
+	private final Paint selectorFill = PaintBuilder.newPaint().build();
+	private final float[] hsv = new float[3];
 
 	@Override
 	public void draw() {

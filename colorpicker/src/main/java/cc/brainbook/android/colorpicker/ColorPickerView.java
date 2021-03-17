@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+
 import cc.brainbook.android.colorpicker.builder.ColorWheelRendererBuilder;
 import cc.brainbook.android.colorpicker.builder.PaintBuilder;
 import cc.brainbook.android.colorpicker.renderer.ColorWheelRenderOption;
@@ -44,9 +46,9 @@ public class ColorPickerView extends View {
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerColorEditTextColor;
-	private Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
+	private final Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
 	private Paint selectorStroke = PaintBuilder.newPaint().color(0).build();
-	private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
+	private final Paint alphaPatternPaint = PaintBuilder.newPaint().build();
 	private ColorCircle currentColorCircle;
 
 	private ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
@@ -55,7 +57,7 @@ public class ColorPickerView extends View {
 	private LightnessSlider lightnessSlider;
 	private AlphaSlider alphaSlider;
 	private EditText colorEdit;
-	private TextWatcher colorTextChange = new TextWatcher() {
+	private final TextWatcher colorTextChange = new TextWatcher() {
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 		}
@@ -103,7 +105,7 @@ public class ColorPickerView extends View {
 		initWith(context, attrs);
 	}
 
-	private void initWith(Context context, AttributeSet attrs) {
+	private void initWith(@NonNull Context context, AttributeSet attrs) {
 		final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorPickerPreference);
 
 		density = typedArray.getInt(R.styleable.ColorPickerPreference_density, 10);
@@ -210,7 +212,7 @@ public class ColorPickerView extends View {
 		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 		int height = 0;
 		if (heightMode == MeasureSpec.UNSPECIFIED)
-			height = widthMeasureSpec;
+			height = heightMeasureSpec;
 		else if (heightMode == MeasureSpec.AT_MOST)
 			height = MeasureSpec.getSize(heightMeasureSpec);
 		else if (widthMode == MeasureSpec.EXACTLY)
@@ -222,7 +224,7 @@ public class ColorPickerView extends View {
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(@NonNull MotionEvent event) {
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_MOVE: {
@@ -276,7 +278,7 @@ public class ColorPickerView extends View {
 		super.onDraw(canvas);
 		canvas.drawColor(backgroundColor);
 
-		float maxRadius = canvas.getWidth() / (1f + ColorWheelRenderer.GAP_PERCENTAGE);
+		float maxRadius = getWidth() / (1f + ColorWheelRenderer.GAP_PERCENTAGE);
 		float size = maxRadius / density / 2;
 		if (colorWheel != null && currentColorCircle != null) {
 			colorWheelFill.setColor(Color.HSVToColor(currentColorCircle.getHsvWithLightness(this.lightness)));
@@ -484,7 +486,7 @@ public class ColorPickerView extends View {
 					if (v == null)
 						return;
 					Object tag = v.getTag();
-					if (tag == null || !(tag instanceof Integer))
+					if (!(tag instanceof Integer))
 						return;
 					setSelectedColor((int) tag);
 				}

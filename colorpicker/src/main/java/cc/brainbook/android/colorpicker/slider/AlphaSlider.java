@@ -7,16 +7,18 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+
 import cc.brainbook.android.colorpicker.ColorPickerView;
 import cc.brainbook.android.colorpicker.Utils;
 import cc.brainbook.android.colorpicker.builder.PaintBuilder;
 
 public class AlphaSlider extends AbsCustomSlider {
 	public int color;
-	private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
-	private Paint barPaint = PaintBuilder.newPaint().build();
-	private Paint solid = PaintBuilder.newPaint().build();
-	private Paint clearingStroke = PaintBuilder.newPaint().color(0xffffffff).xPerMode(PorterDuff.Mode.CLEAR).build();
+	private final Paint alphaPatternPaint = PaintBuilder.newPaint().build();
+	private final Paint barPaint = PaintBuilder.newPaint().build();
+	private final Paint solid = PaintBuilder.newPaint().build();
+	private final Paint clearingStroke = PaintBuilder.newPaint().color(0xffffffff).xPerMode(PorterDuff.Mode.CLEAR).build();
 
 	private Paint clearStroke = PaintBuilder.newPaint().build();
 	private Bitmap clearBitmap;
@@ -45,7 +47,7 @@ public class AlphaSlider extends AbsCustomSlider {
 	}
 
 	@Override
-	protected void drawBar(Canvas barCanvas) {
+	protected void drawBar(@NonNull Canvas barCanvas) {
 		int width = barCanvas.getWidth();
 		int height = barCanvas.getHeight();
 

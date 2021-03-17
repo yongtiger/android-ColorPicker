@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,7 +43,7 @@ public abstract class AbsCustomSlider extends View {
 		init(context, attrs);
 	}
 
-	private void init(Context context, AttributeSet attrs) {
+	private void init(@NonNull Context context, AttributeSet attrs) {
 		TypedArray styledAttrs = context.getTheme().obtainStyledAttributes(
 			attrs, R.styleable.AbsCustomSlider, 0, 0);
 		try {
@@ -103,7 +105,7 @@ public abstract class AbsCustomSlider extends View {
 
 		if (bar != null && bitmapCanvas != null) {
 			bitmapCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-			bitmapCanvas.drawBitmap(bar, barOffsetX, (height - bar.getHeight()) / 2, null);
+			bitmapCanvas.drawBitmap(bar, barOffsetX, (height - bar.getHeight()) * 0.5F, null);
 
 			float x = handleRadius + value * (width - handleRadius * 2);
 			float y = height / 2f;

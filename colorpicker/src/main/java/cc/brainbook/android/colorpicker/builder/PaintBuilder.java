@@ -8,13 +8,16 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
 
+import androidx.annotation.NonNull;
+
 public class PaintBuilder {
+	@NonNull
 	public static PaintHolder newPaint() {
 		return new PaintHolder();
 	}
 
 	public static class PaintHolder {
-		private Paint paint;
+		private final Paint paint;
 
 		private PaintHolder() {
 			this.paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -60,6 +63,7 @@ public class PaintBuilder {
 		}
 	}
 
+	@NonNull
 	public static Shader createAlphaPatternShader(int size) {
 		size /= 2;
 		size = Math.max(8, size * 2);
